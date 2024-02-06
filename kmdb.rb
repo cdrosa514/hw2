@@ -90,6 +90,17 @@ new_studio = Studio.new
 new_studio ["name"] = "Warner Bros."
 new_studio.save
 
+studios = Studio.all
+
+warner = Studio.find_by({"name" => "Warner Bros."})
+
+for studio in studios
+    name = studio["name"]
+    id = warner["id"]
+    puts "#{name} #{id}"
+    # id = studio["id"]
+end
+
 #Insert movies
 
 warner = Studio.find_by({"name" => "Warner Bros."})
@@ -212,14 +223,21 @@ puts ""
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
 
+
+
 movies = Movie.all
 
-
 for movie in movies
+    warner = Studio.find_by({"name" => "Warner Bros."})
     title = movie["title"]
     year_released = movie["year_released"]
     rated = movie["rated"]
-    studio = Studio.find_by ({"id" => movie["studio_id"]})
+   # studio = Studio.where ({"id" => warner["studio_id"]})
+    studio = Movie.where ({"movie_id" => warner["studio_id"]})
+    #studio = Movie.where ({"movie_id" => Studio["id"]})
+    #studio = Movie.where ({"studio_id" => warner["id"]})
+    #studio = movie["studio_id"]
+    #couldnt figure the above out^
     puts "#{title} #{year_released} #{rated} #{studio}"
 end
 
@@ -233,10 +251,12 @@ puts ""
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
 
-for cast in roles
-    title = movie["title"]
-    year_released = movie["year_released"]
-    rated = movie["rated"]
-    studio = Studio.find_by ({"id" => movie["studio_id"]})
-    puts "#{title} #{year_released} #{rated} #{studio}"
-end
+
+
+# for cast in roles
+#     title = movie["title"]
+#     year_released = movie["year_released"]
+#     rated = movie["rated"]
+#     studio = Studio.find_by ({"id" => movie["studio_id"]})
+#     puts "#{title} #{year_released} #{rated} #{studio}"
+# end
